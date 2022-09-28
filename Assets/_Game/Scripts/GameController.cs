@@ -56,8 +56,6 @@ public class GameController : MonoBehaviour
         // Normalized vector dir
         Vector3 dirVectorNormalized = GetVectorNormalized(touchEndPoint, touchStartPoint);
 
-        Debug.Log("GetDirectToMove - Direct normalized " + dirVectorNormalized);
-
         if (Mathf.Abs(dirVectorNormalized.x) > Mathf.Abs(dirVectorNormalized.y))
         {
             dir = dirVectorNormalized.x > 0 ? Vector3.right : Vector3.left;
@@ -73,7 +71,7 @@ public class GameController : MonoBehaviour
     public void GetDataPLayer()
     {
         // Get current player level from playerPrefs
-        playerLevel = PlayerPrefs.GetInt("playerLevel", 1);
+        playerLevel = PlayerPrefs.GetInt("playerLevel", 2);
     }
 
     private void Update()
@@ -83,7 +81,7 @@ public class GameController : MonoBehaviour
         {
             // Get point touch down
             touchStartPoint = Input.mousePosition;
-            Debug.Log("touchStartPoint" + touchStartPoint);
+            // Debug.Log("touchStartPoint" + touchStartPoint);
         }
 
         // If user touch up
@@ -91,33 +89,26 @@ public class GameController : MonoBehaviour
         {
             // Get point touch up
             touchEndPoint = Input.mousePosition;
-            Debug.Log("touchEndPoint" + touchEndPoint);
+            // Debug.Log("touchEndPoint" + touchEndPoint);
         }
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        player.RotateByDir(GetVectorNormalized(touchEndPoint, touchStartPoint));
-
-        if (player.stopSensor.isCantMove)
-        {
-            resetTouchPoint();
-        }
+        // if (!player.isCanMove)
+        // {
+        //     resetTouchPoint();
+        // }
 
         if (!IsTouchValid())
         {
             return;
         }
 
-        // player.stopSensor.ChangeSensorPosition(GetVectorNormalized(touchEndPoint, touchStartPoint));
+        Debug.Log("Direct to move " + GetDirectToMove());
 
-        // Debug.Log("Direct vector " + GetDirectToMove());
-
-
-
-
-        player.MoveByDirect(GetDirectToMove());
+        player.MoveByDirect(GetDirectToMove(), GetVectorNormalized(touchEndPoint, touchStartPoint));
     }
 
     public void resetTouchPoint()

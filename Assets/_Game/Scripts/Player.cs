@@ -5,7 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    public StopSensor stopSensor;
+    public CollisionSensor collisionSensorFront,
+        collisionSensorBack,
+        collisionSensorRight,
+        collisionSensorLeft;
+
+    private bool isCanMove = true;
 
     // Start is called before the first frame update
     void Start() { }
@@ -17,35 +22,49 @@ public class Player : MonoBehaviour
 
     public void SetPosition(Vector3 pointToSet)
     {
-        Debug.Log("Set position player.");
+        // Set position player by point
         transform.position = pointToSet;
     }
 
-    public void RotateByDir(Vector3 dirRotation)
+    public void MoveByDirect(Vector3 dir, Vector3 dirRotation)
     {
-        // Debug.Log("Direct vector rotation " + dirRotation);
-
-        if (Mathf.Abs(dirRotation.x) > Mathf.Abs(dirRotation.y))
+        // If forward dir
+        if (dir == Vector3.forward)
         {
-            transform.rotation =
-                dirRotation.x > 0
-                    ? Quaternion.Euler(Vector3.up * 90)
-                    : Quaternion.Euler(Vector3.up * 270);
+            // Check player can go straight
+            isCanMove = collisionSensorFront.moveAble;
+            Debug.Log("Check move forward " + isCanMove);
         }
-        else
-        {
-            transform.rotation =
-                dirRotation.y > 0
-                    ? Quaternion.Euler(Vector3.up * 0)
-                    : Quaternion.Euler(Vector3.up * 180);
-        }
-    }
 
-    public void MoveByDirect(Vector3 dir)
-    {
-        if (!stopSensor.isCantMove)
+        // If back dir
+        if (dir == Vector3.back)
         {
-            Debug.Log("Run");
+            // Check player can go back
+            isCanMove = collisionSensorBack.moveAble;
+            Debug.Log("Check move back " + isCanMove);
+        }
+
+        // If right dir
+        if (dir == Vector3.right)
+        {
+            // Check player can turn right
+            isCanMove = collisionSensorRight.moveAble;
+            Debug.Log("Check move right " + isCanMove);
+        }
+
+        // If left dir
+        if (dir == Vector3.left)
+        {
+            // Check player can turn left
+            isCanMove = collisionSensorLeft.moveAble;
+            Debug.Log("Check move left " + isCanMove);
+        }
+
+        // If can move
+        if (isCanMove)
+        {
+            Debug.Log("Dir to move " + dir);
+            // Move player by dir
             transform.Translate(dir);
         }
     }
