@@ -15,6 +15,14 @@ public class GameController : MonoBehaviour
     private Vector3 touchStartPoint,
         touchEndPoint;
 
+    public enum Direction
+    {
+        Forward = 0,
+        Right = 1,
+        Back = 2,
+        Left = 3
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,19 +58,19 @@ public class GameController : MonoBehaviour
         return (startPoint - endPoint).normalized;
     }
 
-    private Vector3 GetDirectToMove()
+    private Direction GetDirectToMove()
     {
-        Vector3 dir = Vector3.zero;
+        Direction dir;
         // Normalized vector dir
         Vector3 dirVectorNormalized = GetVectorNormalized(touchEndPoint, touchStartPoint);
 
         if (Mathf.Abs(dirVectorNormalized.x) > Mathf.Abs(dirVectorNormalized.y))
         {
-            dir = dirVectorNormalized.x > 0 ? Vector3.right : Vector3.left;
+            dir = dirVectorNormalized.x > 0 ? Direction.Right : Direction.Left;
         }
         else
         {
-            dir = dirVectorNormalized.y > 0 ? Vector3.forward : Vector3.back;
+            dir = dirVectorNormalized.y > 0 ? Direction.Forward : Direction.Back;
         }
 
         return dir;
@@ -79,16 +87,24 @@ public class GameController : MonoBehaviour
         // If user touch down
         if (Input.GetMouseButtonDown(0))
         {
-            // Get point touch down
-            touchStartPoint = Input.mousePosition;
+            // If player not moving
+            if (!player.isMoving)
+            {
+                // Get point touch down
+                touchStartPoint = Input.mousePosition;
+            }
             // Debug.Log("touchStartPoint" + touchStartPoint);
         }
 
         // If user touch up
         if (Input.GetMouseButtonUp(0))
         {
-            // Get point touch up
-            touchEndPoint = Input.mousePosition;
+            // If player not moving
+            if (!player.isMoving)
+            {
+                // Get point touch up
+                touchEndPoint = Input.mousePosition;
+            }
             // Debug.Log("touchEndPoint" + touchEndPoint);
         }
     }
@@ -96,19 +112,16 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        // if (!player.isCanMove)
-        // {
-        //     resetTouchPoint();
-        // }
+        Debug.Log("Player is can move " + player.isMoving);
 
+        // If touch invalid
         if (!IsTouchValid())
         {
             return;
         }
 
-        Debug.Log("Direct to move " + GetDirectToMove());
-
-        player.MoveByDirect(GetDirectToMove(), GetVectorNormalized(touchEndPoint, touchStartPoint));
+        // Move player by direction user swipe
+        player.MoveByDirect(GetDirectToMove());
     }
 
     public void resetTouchPoint()
