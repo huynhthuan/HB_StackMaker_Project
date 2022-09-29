@@ -15,14 +15,6 @@ public class GameController : MonoBehaviour
     private Vector3 touchStartPoint,
         touchEndPoint;
 
-    public enum Direction
-    {
-        Forward = 0,
-        Right = 1,
-        Back = 2,
-        Left = 3
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +31,6 @@ public class GameController : MonoBehaviour
 
         //Loading map by player level
         mapController.InitMap(playerLevel);
-
         // Set player to start point of map
         player.SetPosition(mapController.GetPointMap("startPoint"));
     }
@@ -79,7 +70,8 @@ public class GameController : MonoBehaviour
     public void GetDataPLayer()
     {
         // Get current player level from playerPrefs
-        playerLevel = PlayerPrefs.GetInt("playerLevel", 2);
+        PlayerPrefs.SetInt("playerLevel", 2);
+        playerLevel = PlayerPrefs.GetInt("playerLevel", 1);
     }
 
     private void Update()
@@ -112,7 +104,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        Debug.Log("Player is can move " + player.isMoving);
+        // Debug.Log("Player is can move " + player.isMoving);
 
         // If touch invalid
         if (!IsTouchValid())
@@ -129,4 +121,6 @@ public class GameController : MonoBehaviour
         touchStartPoint = Vector3.zero;
         touchEndPoint = Vector3.zero;
     }
+
+
 }

@@ -5,10 +5,25 @@ using UnityEngine;
 public class CollisionSensor : MonoBehaviour
 {
     internal bool moveAble = false;
+    public RaycastHit hit;
+
+    [SerializeField]
+    private MapController mapController;
+
+    private bool hasPassStartFireworkPoint = false;
+
+    private void Start()
+    {
+        OnInit();
+    }
+
+    public void OnInit()
+    {
+        hasPassStartFireworkPoint = false;
+    }
 
     void FixedUpdate()
     {
-        RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         if (
             Physics.Raycast(
@@ -31,6 +46,15 @@ public class CollisionSensor : MonoBehaviour
                 // Set can't moveable
                 moveAble = false;
                 // Debug.Log("Did not Hit");
+            }
+
+            if (hit.collider.gameObject.tag == "StartFireWork")
+            {
+                if (!hasPassStartFireworkPoint)
+                {
+                    // Enable firework
+                    mapController.GetComponentInChildren<WinPosController>().startFireWork();
+                }
             }
         }
 

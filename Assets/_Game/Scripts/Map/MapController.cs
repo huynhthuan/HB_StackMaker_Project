@@ -9,6 +9,7 @@ public class MapController : MonoBehaviour
 
     public void InitMap(int level)
     {
+        Debug.Log("Init map " + level);
         clearMap();
         // Loading map from resource
         var mapRes = Resources.Load("Maps/Map_Level_" + level) as GameObject;
@@ -17,9 +18,9 @@ public class MapController : MonoBehaviour
         // Set map to map plane
         mapInstance.transform.SetParent(transform);
         Debug.Log("Init map done.");
-        Debug.Log(
-            "Map " + gameObject.GetComponentInChildren<MapLevelController>().name + " has loaded."
-        );
+        // Debug.Log(
+        //     "Map " + gameObject.GetComponentInChildren<MapLevelController>().name + " has loaded."
+        // );
     }
 
     public Vector3 GetPointMap(string position)
@@ -44,5 +45,9 @@ public class MapController : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
+    }
+
+    public void FinishLevel(){
+
     }
 }

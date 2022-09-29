@@ -7,11 +7,13 @@ TagManager:
   - MAST_Holder
   - Brick
   - Pllar
+  - StartFireWork
+  - Pllar_Clear_Brick
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Pillar Clear Brick
   - Water
   - UI
   - 
