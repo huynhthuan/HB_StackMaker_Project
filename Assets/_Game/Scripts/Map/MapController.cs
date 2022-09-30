@@ -6,6 +6,8 @@ public class MapController : MonoBehaviour
 {
     [SerializeField]
     private Vector3 offsetPlayerStand = Vector3.zero;
+    public MapLevelController mapLevelController;
+    public WinPosController winPosController;
 
     public void InitMap(int level)
     {
@@ -17,6 +19,8 @@ public class MapController : MonoBehaviour
         GameObject mapInstance = Instantiate(mapRes, Vector3.zero, Quaternion.identity);
         // Set map to map plane
         mapInstance.transform.SetParent(transform);
+        mapLevelController = mapInstance.GetComponent<MapLevelController>();
+        winPosController = mapLevelController.GetComponentInChildren<WinPosController>();
         Debug.Log("Init map done.");
         // Debug.Log(
         //     "Map " + gameObject.GetComponentInChildren<MapLevelController>().name + " has loaded."
@@ -47,7 +51,5 @@ public class MapController : MonoBehaviour
         }
     }
 
-    public void FinishLevel(){
-
-    }
+    public void FinishLevel() { }
 }

@@ -9,4 +9,7 @@ public class MapLevelController : MonoBehaviour
 
     [SerializeField]
     public Transform endPoint;
+
+     [SerializeField]
+    public WinPosController winPosController;
 }

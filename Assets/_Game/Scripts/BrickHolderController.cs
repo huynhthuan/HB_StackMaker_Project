@@ -12,7 +12,6 @@ public class BrickHolderController : MonoBehaviour
 
     [SerializeField]
     public int countHolder = 0;
-    public int countHolderForRemove = 2;
 
     // Start is called before the first frame update
     void Start() { }
@@ -34,18 +33,19 @@ public class BrickHolderController : MonoBehaviour
         brickPrefab.transform.eulerAngles = new Vector3(-90f, 0, -180f);
         brickPrefab.transform.position = new Vector3(
             gameObject.transform.position.x,
-            gameObject.transform.position.y - 0.31f - (0.31f * countHolder),
+            gameObject.transform.position.y - (0.31f * countHolder),
             gameObject.transform.position.z
         );
 
         countHolder++;
-        countHolderForRemove++;
     }
 
-    public void ClearBrickBlock()
+    public void ClearAllBrickBlock()
     {
-        Debug.Log("Remove brick block");
-        countHolderForRemove--;
-        Destroy(transform.GetChild(0).gameObject);
+        countHolder = 0;
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

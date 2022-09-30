@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     private Player player;
 
     [SerializeField]
-    private MapController mapController;
+    public MapController mapController;
 
     protected int playerLevel;
 

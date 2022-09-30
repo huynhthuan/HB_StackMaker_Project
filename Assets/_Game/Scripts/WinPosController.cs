@@ -5,7 +5,7 @@ using UnityEngine;
 public class WinPosController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject openBoxPosition;
+    public Transform openBoxPosition;
 
     [SerializeField]
     private GameObject boxGiftClose;

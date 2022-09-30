@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
 
     internal bool isCanMove = true;
     internal bool isMoving = false;
+    internal bool isHasStandFinishLevel = false;
 
     public Direction direction;
 
@@ -104,12 +105,6 @@ public class Player : MonoBehaviour
             // Set moving false
             isMoving = false;
         }
-
-        if (collisionSensorFoot.hasStandEndLevel && brickHolderController.countHolderForRemove > 0)
-        {
-            DecreasePlayerTall();
-            brickHolderController.ClearBrickBlock();
-        }
     }
 
     private void IncreasePlayerTall()
@@ -120,7 +115,11 @@ public class Player : MonoBehaviour
     public void DecreasePlayerTall()
     {
         Debug.Log("Decrease player tall");
-        transform.Translate(Vector3.down * 0.31f);
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            new Vector3(transform.position.x, 2.5f, transform.position.z),
+            0.31f
+        );
     }
 
     public void runToBox()
@@ -128,8 +127,43 @@ public class Player : MonoBehaviour
         transform.position = Vector3.MoveTowards(
             transform.position,
             winPosController.finishPosition.position,
-            Vector3.Distance(transform.position, winPosController.finishPosition.position)
+            Vector3.Distance(
+                transform.position,
+                gameController.mapController.winPosController.openBoxPosition.position
+            ) / Time.fixedDeltaTime
         );
+    }
+
+    private void FixedUpdate()
+    {
+        if (
+            collisionSensorFoot.hasStandEndLevel
+            && transform.position.y >= 2.5f
+            && brickHolderController.countHolder > 0
+        )
+        {
+            DecreasePlayerTall();
+        }
+
+        if (
+            collisionSensorFoot.hasStandEndLevel
+            && transform.position.y <= 2.5f
+            && brickHolderController.countHolder > 0
+        )
+        {
+            brickHolderController.ClearAllBrickBlock();
+        }
+
+        if (collisionSensorFoot.hasStandEndLevel && brickHolderController.countHolder == 0)
+        {
+            if (
+                Vector3.Distance(transform.position, winPosController.finishPosition.position)
+                >= 0.01f
+            )
+            {
+                runToBox();
+            }
+        }
     }
 
     // public void debugDev(){
