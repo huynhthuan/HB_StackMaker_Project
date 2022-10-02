@@ -7509,9 +7509,10 @@ GameObject:
   - component: {fileID: 4662112139847381}
   - component: {fileID: 33188758576531620}
   - component: {fileID: 23134829450915822}
+  - component: {fileID: 389509823704911465}
   m_Layer: 0
   m_Name: di (3)
-  m_TagString: Untagged
+  m_TagString: Pllar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7579,6 +7580,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &389509823704911465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191469147039628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999905, y: 1.0000014, z: 1.0000031}
+  m_Center: {x: 0.0000010728836, y: 0.00000059604656, z: 0}
 --- !u!1 &1207897053860087
 GameObject:
   m_ObjectHideFlags: 0
@@ -10851,9 +10865,10 @@ GameObject:
   - component: {fileID: 4771742858000308}
   - component: {fileID: 33799921150653981}
   - component: {fileID: 23784226222503477}
+  - component: {fileID: 3435802424999144478}
   m_Layer: 0
   m_Name: di (29)
-  m_TagString: Untagged
+  m_TagString: Pllar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10921,6 +10936,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3435802424999144478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285850222486499}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999905, y: 1.0000014, z: 1.0000031}
+  m_Center: {x: 0.0000010728836, y: 0.00000059604656, z: -5.684342e-14}
 --- !u!1 &1286222543879588
 GameObject:
   m_ObjectHideFlags: 0
@@ -22053,9 +22081,10 @@ GameObject:
   - component: {fileID: 4154534189254632}
   - component: {fileID: 33386887620509668}
   - component: {fileID: 23524972589168962}
+  - component: {fileID: 9060792196222304725}
   m_Layer: 0
   m_Name: di (2)
-  m_TagString: Untagged
+  m_TagString: Pllar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22123,6 +22152,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9060792196222304725
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362063027165453}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999905, y: 1.0000014, z: 1.0000031}
+  m_Center: {x: 0.0000010728836, y: 0.00000059604656, z: 0}
 --- !u!1 &1374757906443523
 GameObject:
   m_ObjectHideFlags: 0
@@ -22314,7 +22356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e6ccdc9aab7374eb6c3bddba4b9b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openBoxPosition: {fileID: 1285850222486499}
+  openBoxPosition: {fileID: 0}
   boxGiftClose: {fileID: 1095323009806971}
   boxGiftOpen: {fileID: 1502762753808250}
   finishPosition: {fileID: 4700099795116569}
@@ -25494,7 +25536,7 @@ GameObject:
   - component: {fileID: 7353059128251878564}
   m_Layer: 0
   m_Name: lihua
-  m_TagString: Untagged
+  m_TagString: StartFireWork
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33938,9 +33980,9 @@ GameObject:
   - component: {fileID: 33082754106593514}
   - component: {fileID: 23513141896460911}
   - component: {fileID: 7816230477325716872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: zhongdian
-  m_TagString: Untagged
+  m_TagString: Pllar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36777,9 +36819,10 @@ GameObject:
   - component: {fileID: 4100889143774917}
   - component: {fileID: 33213648475005078}
   - component: {fileID: 23758723246471295}
+  - component: {fileID: 3527940973942644846}
   m_Layer: 0
   m_Name: di (24)
-  m_TagString: Untagged
+  m_TagString: Pllar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36847,6 +36890,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3527940973942644846
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597673109783079}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999905, y: 1.0000014, z: 1.0000031}
+  m_Center: {x: 0.0000010728836, y: 0.00000059604656, z: 0}
 --- !u!1 &1603104349704889
 GameObject:
   m_ObjectHideFlags: 0
@@ -52962,7 +53018,7 @@ GameObject:
   - component: {fileID: 23003358548213330}
   m_Layer: 0
   m_Name: qidian
-  m_TagString: StartFireWork
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53608,9 +53664,10 @@ GameObject:
   - component: {fileID: 4605487277644281}
   - component: {fileID: 33568956813689356}
   - component: {fileID: 23682509698407299}
+  - component: {fileID: 8057717499294684548}
   m_Layer: 0
   m_Name: di (1)
-  m_TagString: Untagged
+  m_TagString: Pllar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53678,3 +53735,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8057717499294684548
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999364588673746}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999905, y: 1.0000014, z: 1.0000031}
+  m_Center: {x: 0.0000010728836, y: 0.00000059604656, z: -5.684342e-14}

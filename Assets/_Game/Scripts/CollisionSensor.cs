@@ -11,6 +11,7 @@ public class CollisionSensor : MonoBehaviour
     private MapController mapController;
 
     private bool hasPassStartFireworkPoint = false;
+    private bool hasOpenBox = false;
 
     private void Start()
     {
@@ -54,6 +55,17 @@ public class CollisionSensor : MonoBehaviour
                 {
                     // Enable firework
                     mapController.GetComponentInChildren<WinPosController>().startFireWork();
+                }
+            }
+
+            if (hit.collider.gameObject.tag == "OpenBox")
+            {
+                if (!hasOpenBox)
+                {
+                    hasOpenBox = true;
+                    // Enable firework
+                    gameObject.GetComponentInParent<Player>().gameController.SwitchSubCamera();
+                    gameObject.GetComponentInParent<Player>().animator.SetInteger("renwu", 2);
                 }
             }
         }

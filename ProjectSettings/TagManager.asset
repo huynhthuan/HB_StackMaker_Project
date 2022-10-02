@@ -9,6 +9,8 @@ TagManager:
   - Pllar
   - StartFireWork
   - Pllar_Clear_Brick
+  - OpenBox
+  - SubCamera
   layers:
   - Default
   - TransparentFX

@@ -17,7 +17,7 @@ public class WinPosController : MonoBehaviour
     public Transform finishPosition;
 
     [SerializeField]
-    private ParticleSystem fireWorkPartical;
+    public ParticleSystem fireWorkPartical;
 
     // Start is called before the first frame update
     void Start() { }

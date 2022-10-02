@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class MapController : MonoBehaviour
 {
-    [SerializeField]
-    private Vector3 offsetPlayerStand = Vector3.zero;
-    public MapLevelController mapLevelController;
-    public WinPosController winPosController;
+    internal MapLevelController mapLevelController;
+    internal WinPosController winPosController;
 
     public void InitMap(int level)
     {

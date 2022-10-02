@@ -20,17 +20,18 @@ public class Player : MonoBehaviour
     public CollisionSensorFoot collisionSensorFoot;
 
     [SerializeField]
-    private GameController gameController;
+    public GameController gameController;
 
     [SerializeField]
     private BrickHolderController brickHolderController;
 
     [SerializeField]
-    private WinPosController winPosController;
+    public Animator animator;
 
     internal bool isCanMove = true;
     internal bool isMoving = false;
     internal bool isHasStandFinishLevel = false;
+    internal bool isHasStandOpenBoxPosition = false;
 
     public Direction direction;
 
@@ -66,16 +67,29 @@ public class Player : MonoBehaviour
 
     public void MoveByDirect(Direction dir)
     {
+        if (collisionSensorFoot.hasStandEndLevel && brickHolderController.countHolder > 0)
+        {
+            return;
+        }
+
         // Check if can move by dir
         isCanMove = listCollisionSensor[(int)dir].moveAble;
-        // Debug.Log("Check move forward " + dir);
+        Debug.Log("Check move forward " + dir + " - " + isCanMove);
 
         // If can move
         if (isCanMove)
         {
             isMoving = true;
+
             // Move player by dir
-            transform.Translate(directionVector[(int)dir]);
+            if (collisionSensorFoot.hasStandEndLevel && brickHolderController.countHolder == 0)
+            {
+                transform.Translate(directionVector[(int)dir] * 0.05f);
+            }
+            else
+            {
+                transform.Translate(directionVector[(int)dir]);
+            }
 
             RaycastHit currentRayCastHit = collisionSensorFoot.hit;
             BrickController hitBrickController =
@@ -122,18 +136,6 @@ public class Player : MonoBehaviour
         );
     }
 
-    public void runToBox()
-    {
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            winPosController.finishPosition.position,
-            Vector3.Distance(
-                transform.position,
-                gameController.mapController.winPosController.openBoxPosition.position
-            ) / Time.fixedDeltaTime
-        );
-    }
-
     private void FixedUpdate()
     {
         if (
@@ -152,17 +154,6 @@ public class Player : MonoBehaviour
         )
         {
             brickHolderController.ClearAllBrickBlock();
-        }
-
-        if (collisionSensorFoot.hasStandEndLevel && brickHolderController.countHolder == 0)
-        {
-            if (
-                Vector3.Distance(transform.position, winPosController.finishPosition.position)
-                >= 0.01f
-            )
-            {
-                runToBox();
-            }
         }
     }
 

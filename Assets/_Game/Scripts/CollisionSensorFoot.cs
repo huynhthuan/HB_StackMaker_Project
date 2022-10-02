@@ -9,6 +9,7 @@ public class CollisionSensorFoot : MonoBehaviour
     public RaycastHit hit;
 
     public bool hasStandEndLevel;
+    public bool isHasPassFireWork;
 
     // Start is called before the first frame update
     void Start() { }
@@ -35,14 +36,25 @@ public class CollisionSensorFoot : MonoBehaviour
                 {
                     hasStandEndLevel = true;
                 }
-                else
-                {
-                    hasStandEndLevel = false;
-                }
             }
             else
             {
                 // Debug.Log("Did not Hit");
+            }
+
+            if (hit.collider.gameObject.tag == "OpenBox")
+            {
+                player.isHasStandOpenBoxPosition = true;
+            }
+
+            if (hit.collider.gameObject.layer == 6)
+            {
+                if (isHasPassFireWork)
+                {
+                    return;
+                }
+                isHasPassFireWork = true;
+                hit.collider.GetComponentInParent<WinPosController>().fireWorkPartical.Play();
             }
         }
 

@@ -10,6 +10,12 @@ public class GameController : MonoBehaviour
     [SerializeField]
     public MapController mapController;
 
+    [SerializeField]
+    public Camera mainCamera;
+
+    [SerializeField]
+    public Camera subCamera;
+
     protected int playerLevel;
 
     private Vector3 touchStartPoint,
@@ -23,6 +29,9 @@ public class GameController : MonoBehaviour
 
     private void OnInit()
     {
+        // Reset camera
+        ResetCamera();
+
         // Reset touch point
         resetTouchPoint();
 
@@ -122,5 +131,15 @@ public class GameController : MonoBehaviour
         touchEndPoint = Vector3.zero;
     }
 
+    public void SwitchSubCamera()
+    {
+        mainCamera.gameObject.SetActive(false);
+        subCamera.gameObject.SetActive(true);
+    }
 
+    public void ResetCamera()
+    {
+        mainCamera.gameObject.SetActive(true);
+        subCamera.gameObject.SetActive(false);
+    }
 }
