@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollisionSensorFoot : MonoBehaviour
 {
     [SerializeField]
-    private Player player;
+    private GameController gameController;
     public RaycastHit hit;
 
     public bool hasStandEndLevel;
@@ -14,11 +14,25 @@ public class CollisionSensorFoot : MonoBehaviour
     // Start is called before the first frame update
     void Start() { }
 
+    public void OnInit()
+    {
+        isHasPassFireWork = false;
+        hasStandEndLevel = false;
+    }
+
     // Update is called once per frame
     void Update() { }
 
     private void FixedUpdate()
     {
+        if (
+            hasStandEndLevel
+            && transform.GetComponentInParent<Player>().brickHolderController.countHolder == 0
+        )
+        {
+            transform.GetComponentInParent<Player>().MoveByDirect(Direction.Forward);
+        }
+
         if (
             Physics.Raycast(
                 transform.position,
@@ -35,26 +49,22 @@ public class CollisionSensorFoot : MonoBehaviour
                 if (hit.collider.gameObject.layer == 3)
                 {
                     hasStandEndLevel = true;
+                    gameController.isLevelPlaying = false;
+                }
+
+                if (hit.collider.gameObject.layer == 6)
+                {
+                    if (isHasPassFireWork)
+                    {
+                        return;
+                    }
+                    isHasPassFireWork = true;
+                    hit.collider.GetComponentInParent<WinPosController>().fireWorkPartical.Play();
                 }
             }
             else
             {
                 // Debug.Log("Did not Hit");
-            }
-
-            if (hit.collider.gameObject.tag == "OpenBox")
-            {
-                player.isHasStandOpenBoxPosition = true;
-            }
-
-            if (hit.collider.gameObject.layer == 6)
-            {
-                if (isHasPassFireWork)
-                {
-                    return;
-                }
-                isHasPassFireWork = true;
-                hit.collider.GetComponentInParent<WinPosController>().fireWorkPartical.Play();
             }
         }
 

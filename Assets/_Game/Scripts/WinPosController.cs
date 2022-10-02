@@ -27,6 +27,7 @@ public class WinPosController : MonoBehaviour
 
     public void openBox()
     {
+        Debug.Log("Open box");
         boxGiftClose.SetActive(false);
         boxGiftOpen.SetActive(true);
     }

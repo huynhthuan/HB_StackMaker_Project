@@ -89,7 +89,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPoint: {fileID: 5231024835605266240}
   endPoint: {fileID: 808640986111799330}
-  winPosController: {fileID: 0}
 --- !u!1001 &804432855899289905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97,6 +96,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5441392263790176737}
     m_Modifications:
+    - target: {fileID: 1095323009806971, guid: bec8fbf23e70b4f42b574dddd6681a4c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1164329738831985, guid: bec8fbf23e70b4f42b574dddd6681a4c, type: 3}
       propertyPath: m_IsActive
       value: 1

@@ -23,15 +23,15 @@ public class Player : MonoBehaviour
     public GameController gameController;
 
     [SerializeField]
-    private BrickHolderController brickHolderController;
+    public BrickHolderController brickHolderController;
 
     [SerializeField]
     public Animator animator;
 
-    internal bool isCanMove = true;
-    internal bool isMoving = false;
-    internal bool isHasStandFinishLevel = false;
-    internal bool isHasStandOpenBoxPosition = false;
+    internal bool isCanMove;
+    internal bool isMoving;
+    internal bool isHasStandFinishLevel;
+    internal bool isHasStandOpenBoxPosition;
 
     public Direction direction;
 
@@ -43,7 +43,21 @@ public class Player : MonoBehaviour
         Vector3.left
     };
 
-    private void OnInit() { }
+    public void OnInit(Vector3 initPosition)
+    {
+        animator.SetInteger("renwu", 0);
+        SetPosition(initPosition);
+        isHasStandFinishLevel = false;
+        isHasStandOpenBoxPosition = false;
+        isCanMove = true;
+        isMoving = false;
+        collisionSensorFoot.OnInit();
+        brickHolderController.OnInit();
+        foreach (CollisionSensor child in listCollisionSensor)
+        {
+            child.OnInit();
+        }
+    }
 
     public void SetPosition(Vector3 pointToSet)
     {
@@ -67,14 +81,9 @@ public class Player : MonoBehaviour
 
     public void MoveByDirect(Direction dir)
     {
-        if (collisionSensorFoot.hasStandEndLevel && brickHolderController.countHolder > 0)
-        {
-            return;
-        }
-
         // Check if can move by dir
         isCanMove = listCollisionSensor[(int)dir].moveAble;
-        Debug.Log("Check move forward " + dir + " - " + isCanMove);
+        // Debug.Log("Check move forward " + dir + " - " + isCanMove);
 
         // If can move
         if (isCanMove)
@@ -156,23 +165,19 @@ public class Player : MonoBehaviour
             brickHolderController.ClearAllBrickBlock();
         }
     }
-
-    // public void debugDev(){
-    //     Debug.Log("123");
-    // }
 }
 
-// #if UNITY_EDITOR
-// [CustomEditor(typeof(Player))]
-// public class PlayerButton : Editor
-// {
-//     public override void OnInspectorGUI()
-//     {
-//         DrawDefaultInspector();
-//         if (GUILayout.Button("Update walkable point"))
-//         {
-//             ((Player)target).debugDev();
-//         }
-//     }
-// }
-// #endif
+#if UNITY_EDITOR
+[CustomEditor(typeof(Player))]
+public class PlayerButton : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        if (GUILayout.Button("Update walkable point"))
+        {
+            ((Player)target).MoveByDirect(Direction.Forward);
+        }
+    }
+}
+#endif

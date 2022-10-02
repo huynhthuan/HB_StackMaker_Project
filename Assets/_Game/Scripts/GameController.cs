@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -14,21 +15,31 @@ public class GameController : MonoBehaviour
     public Camera mainCamera;
 
     [SerializeField]
+    public UiController uiController;
+
+    [SerializeField]
     public Camera subCamera;
 
-    protected int playerLevel;
+    public int playerLevel;
 
     private Vector3 touchStartPoint,
         touchEndPoint;
 
+    internal bool isLevelPlaying = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetInt("playerLevel", 1);
         OnInit();
     }
 
     private void OnInit()
     {
+        uiController.HideAllUI();
+
+        uiController.ShowUI(UILayer.LOADING);
+
         // Reset camera
         ResetCamera();
 
@@ -41,7 +52,10 @@ public class GameController : MonoBehaviour
         //Loading map by player level
         mapController.InitMap(playerLevel);
         // Set player to start point of map
-        player.SetPosition(mapController.GetPointMap("startPoint"));
+        player.OnInit(mapController.GetPointMap("startPoint"));
+        isLevelPlaying = true;
+
+        uiController.HideUI(UILayer.LOADING);
     }
 
     private void OnDespawn() { }
@@ -50,7 +64,9 @@ public class GameController : MonoBehaviour
     {
         return Vector3.Distance(touchStartPoint, touchEndPoint) >= 10f
             && touchEndPoint != Vector3.zero
-            && touchEndPoint != Vector3.zero;
+            && touchEndPoint != Vector3.zero
+            && !player.collisionSensorFoot.hasStandEndLevel
+            && isLevelPlaying;
     }
 
     public Vector3 GetVectorNormalized(Vector3 startPoint, Vector3 endPoint)
@@ -79,8 +95,8 @@ public class GameController : MonoBehaviour
     public void GetDataPLayer()
     {
         // Get current player level from playerPrefs
-        PlayerPrefs.SetInt("playerLevel", 2);
         playerLevel = PlayerPrefs.GetInt("playerLevel", 1);
+        Debug.Log("Current Level: " + playerLevel);
     }
 
     private void Update()
@@ -121,6 +137,13 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        if (player.isHasStandOpenBoxPosition)
+        {
+            return;
+        }
+
+        Debug.Log("isHasStandOpenBoxPosition " + player.isHasStandOpenBoxPosition);
+
         // Move player by direction user swipe
         player.MoveByDirect(GetDirectToMove());
     }
@@ -141,5 +164,25 @@ public class GameController : MonoBehaviour
     {
         mainCamera.gameObject.SetActive(true);
         subCamera.gameObject.SetActive(false);
+    }
+
+    public void OnEndLevel()
+    {
+        uiController.ShowUI(UILayer.END_LEVEL);
+    }
+
+    public void OnNextLevel()
+    {
+        playerLevel++;
+        Debug.Log("playerLevel " + playerLevel);
+        PlayerPrefs.SetInt("playerLevel", playerLevel);
+        OnInit();
+    }
+
+    public void OnRestartLevel()
+    {
+        playerLevel--;
+        PlayerPrefs.SetInt("playerLevel", playerLevel);
+        OnInit();
     }
 }

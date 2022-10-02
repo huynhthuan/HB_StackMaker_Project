@@ -10,8 +10,8 @@ public class CollisionSensor : MonoBehaviour
     [SerializeField]
     private MapController mapController;
 
-    private bool hasPassStartFireworkPoint = false;
-    private bool hasOpenBox = false;
+    private bool hasPassStartFireworkPoint;
+    private bool hasOpenBox;
 
     private void Start()
     {
@@ -21,6 +21,7 @@ public class CollisionSensor : MonoBehaviour
     public void OnInit()
     {
         hasPassStartFireworkPoint = false;
+        hasOpenBox = false;
     }
 
     void FixedUpdate()
@@ -60,12 +61,20 @@ public class CollisionSensor : MonoBehaviour
 
             if (hit.collider.gameObject.tag == "OpenBox")
             {
+                gameObject.GetComponentInParent<Player>().isHasStandOpenBoxPosition = true;
+
                 if (!hasOpenBox)
                 {
+                    GameController gameController = gameObject
+                        .GetComponentInParent<Player>()
+                        .gameController;
+
                     hasOpenBox = true;
                     // Enable firework
-                    gameObject.GetComponentInParent<Player>().gameController.SwitchSubCamera();
+                    gameController.SwitchSubCamera();
                     gameObject.GetComponentInParent<Player>().animator.SetInteger("renwu", 2);
+                    mapController.GetComponentInChildren<WinPosController>().openBox();
+                    gameController.OnEndLevel();
                 }
             }
         }

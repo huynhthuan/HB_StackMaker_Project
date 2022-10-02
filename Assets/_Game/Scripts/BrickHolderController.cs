@@ -11,13 +11,21 @@ public class BrickHolderController : MonoBehaviour
     private GameObject player;
 
     [SerializeField]
-    public int countHolder = 0;
+    public int countHolder = 1;
 
     // Start is called before the first frame update
-    void Start() { }
+    void Start()
+    {
+        OnInit();
+    }
 
     // Update is called once per frame
     void Update() { }
+
+    public void OnInit()
+    {
+        countHolder = 1;
+    }
 
     public void AddBrickBlock()
     {
