@@ -5,7 +5,8 @@ using UnityEngine;
 public enum UILayer
 {
     LOADING = 0,
-    END_LEVEL = 1
+    END_LEVEL = 1,
+    NO_NEW_LEVEL = 2
 }
 
 public class UiController : MonoBehaviour
@@ -16,6 +17,7 @@ public class UiController : MonoBehaviour
 
     public void ShowUI(UILayer uiIndex)
     {
+        HideAllUI();
         uiLayerList[(int)uiIndex].SetActive(true);
     }
 
