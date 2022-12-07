@@ -20,6 +20,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     public Camera subCamera;
 
+    [SerializeField]
+    public int maxLevel;
+
     public int playerLevel;
 
     private Vector3 touchStartPoint,
@@ -174,6 +177,13 @@ public class GameController : MonoBehaviour
     public void OnNextLevel()
     {
         playerLevel++;
+
+        if (playerLevel > maxLevel)
+        {
+            uiController.ShowUI(UILayer.NO_NEW_LEVEL);
+            return;
+        }
+
         Debug.Log("playerLevel " + playerLevel);
         PlayerPrefs.SetInt("playerLevel", playerLevel);
         OnInit();
@@ -181,8 +191,13 @@ public class GameController : MonoBehaviour
 
     public void OnRestartLevel()
     {
-        playerLevel--;
         PlayerPrefs.SetInt("playerLevel", playerLevel);
+        OnInit();
+    }
+
+    public void OnReplay()
+    {
+        PlayerPrefs.SetInt("playerLevel", 1);
         OnInit();
     }
 }
