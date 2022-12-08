@@ -145,4 +145,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickBlock: {fileID: 0}
-  isHoldBrickBlock: 1
+  isHoldBrickBlock: 0

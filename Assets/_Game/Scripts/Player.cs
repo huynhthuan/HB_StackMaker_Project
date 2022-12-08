@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
     public void OnInit(Vector3 initPosition)
     {
+
         animator.transform.localPosition = Vector3.zero;
         animator.SetInteger("renwu", 0);
         SetPosition(initPosition);
@@ -98,7 +99,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                transform.Translate(directionVector[(int)dir]);
+                transform.Translate(directionVector[(int)dir] * 0.5f);
             }
 
             RaycastHit currentRayCastHit = collisionSensorFoot.hit;
@@ -119,12 +120,13 @@ public class Player : MonoBehaviour
 
             if (currentRayCastHit.collider.gameObject.tag == "Remove Brick")
             {
-                if (hitBrickController.isHoldBrickBlock)
+                if (!hitBrickController.isHoldBrickBlock)
                 {
                     // Add brick to brick holder
                     brickHolderController.RemoveBrickBlock();
                     // Decrease player tall
                     DecreasePlayerTall();
+                    hitBrickController.isHoldBrickBlock = true;
                 }
             }
         }
@@ -150,7 +152,7 @@ public class Player : MonoBehaviour
     public void DecreasePlayerTall()
     {
         Debug.Log("Decrease player tall");
-        animator.transform.Translate(Vector3.down * 0.31f);
+        transform.Translate(Vector3.down * 0.31f);
     }
 
     public IEnumerator DecreaseAllPlayerTall()

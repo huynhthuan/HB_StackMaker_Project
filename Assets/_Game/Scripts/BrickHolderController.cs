@@ -28,6 +28,7 @@ public class BrickHolderController : MonoBehaviour
     public void OnInit()
     {
         countHolder = 1;
+        brickHolderObjs = new List<GameObject>();
     }
 
     public void AddBrickBlock()
