@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField]
-    private Player player;
+    internal Player player;
 
     [SerializeField]
     public MapController mapController;
@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetInt("playerLevel", 1);
+        // PlayerPrefs.SetInt("playerLevel", 1);
         OnInit();
     }
 

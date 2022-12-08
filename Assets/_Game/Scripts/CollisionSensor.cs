@@ -37,7 +37,7 @@ public class CollisionSensor : MonoBehaviour
         )
         {
             // If hit Brick or Pllar
-            if (hit.collider.gameObject.tag == "Brick" || hit.collider.gameObject.tag == "Pllar")
+            if (hit.collider.gameObject.tag == "Brick" || hit.collider.gameObject.tag == "Pllar" || hit.collider.gameObject.tag == "Remove Brick")
             {
                 // Set moveable
                 moveAble = true;

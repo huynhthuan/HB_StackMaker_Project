@@ -11,6 +11,8 @@ TagManager:
   - Pllar_Clear_Brick
   - OpenBox
   - SubCamera
+  - Remove Brick
+  - Remove Block
   layers:
   - Default
   - TransparentFX

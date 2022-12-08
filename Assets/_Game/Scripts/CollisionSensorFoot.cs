@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollisionSensorFoot : MonoBehaviour
 {
     [SerializeField]
-    private GameController gameController;
+    internal GameController gameController;
     public RaycastHit hit;
 
     public bool hasStandEndLevel;
@@ -27,7 +27,7 @@ public class CollisionSensorFoot : MonoBehaviour
     {
         if (
             hasStandEndLevel
-            && transform.GetComponentInParent<Player>().brickHolderController.countHolder == 0
+            && transform.GetComponentInParent<Player>().brickHolderController.countHolder == 1
         )
         {
             transform.GetComponentInParent<Player>().MoveByDirect(Direction.Forward);
@@ -46,8 +46,10 @@ public class CollisionSensorFoot : MonoBehaviour
             if (hit.collider.gameObject.tag == "Brick" || hit.collider.gameObject.tag == "Pllar")
             {
                 // Debug.Log("Did Hit Brick or Pllar");
-                if (hit.collider.gameObject.layer == 3)
+                if (hit.collider.gameObject.layer == 3 && hasStandEndLevel == false)
                 {
+                    Debug.Log("End level");
+                    StartCoroutine(gameController.player.DecreaseAllPlayerTall());
                     hasStandEndLevel = true;
                     gameController.isLevelPlaying = false;
                 }

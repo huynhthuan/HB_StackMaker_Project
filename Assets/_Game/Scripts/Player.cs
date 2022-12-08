@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
 
     public void OnInit(Vector3 initPosition)
     {
+        animator.transform.localPosition = Vector3.zero;
         animator.SetInteger("renwu", 0);
         SetPosition(initPosition);
         isHasStandFinishLevel = false;
@@ -91,7 +92,7 @@ public class Player : MonoBehaviour
             isMoving = true;
 
             // Move player by dir
-            if (collisionSensorFoot.hasStandEndLevel && brickHolderController.countHolder == 0)
+            if (collisionSensorFoot.hasStandEndLevel && brickHolderController.countHolder == 1)
             {
                 transform.Translate(directionVector[(int)dir] * 0.05f);
             }
@@ -113,6 +114,17 @@ public class Player : MonoBehaviour
                     brickHolderController.AddBrickBlock();
                     // Increase player tall
                     IncreasePlayerTall();
+                }
+            }
+
+            if (currentRayCastHit.collider.gameObject.tag == "Remove Brick")
+            {
+                if (hitBrickController.isHoldBrickBlock)
+                {
+                    // Add brick to brick holder
+                    brickHolderController.RemoveBrickBlock();
+                    // Decrease player tall
+                    DecreasePlayerTall();
                 }
             }
         }
@@ -138,31 +150,25 @@ public class Player : MonoBehaviour
     public void DecreasePlayerTall()
     {
         Debug.Log("Decrease player tall");
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            new Vector3(transform.position.x, 2.5f, transform.position.z),
-            0.31f
-        );
+        animator.transform.Translate(Vector3.down * 0.31f);
     }
 
-    private void FixedUpdate()
+    public IEnumerator DecreaseAllPlayerTall()
     {
-        if (
-            collisionSensorFoot.hasStandEndLevel
-            && transform.position.y >= 2.5f
-            && brickHolderController.countHolder > 0
-        )
-        {
-            DecreasePlayerTall();
-        }
+        Debug.Log("Decrease player all tall");
 
-        if (
-            collisionSensorFoot.hasStandEndLevel
-            && transform.position.y <= 2.5f
-            && brickHolderController.countHolder > 0
-        )
+        WaitForSeconds wait = new WaitForSeconds(0.01f);
+
+        int currentHolder = brickHolderController.countHolder;
+        for (int i = 0; i < currentHolder; i++)
         {
-            brickHolderController.ClearAllBrickBlock();
+
+            Debug.Log("Holder " + brickHolderController.countHolder);
+            brickHolderController.RemoveBrickBlock();
+            // Decrease player tall
+            transform.Translate(Vector3.down * 0.31f);
+            // animator.transform.Translate(Vector3.down * 0.31f);
+            yield return wait;
         }
     }
 }
@@ -174,9 +180,9 @@ public class PlayerButton : Editor
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        if (GUILayout.Button("Update walkable point"))
+        if (GUILayout.Button("DecreasePlayerTall"))
         {
-            ((Player)target).MoveByDirect(Direction.Forward);
+            ((Player)target).DecreasePlayerTall();
         }
     }
 }

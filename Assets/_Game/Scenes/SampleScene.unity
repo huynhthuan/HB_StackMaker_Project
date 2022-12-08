@@ -2563,13 +2563,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.47063458, y: 0, z: 0, w: 0.8823283}
+  m_LocalRotation: {x: 0.31730464, y: 0, z: 0, w: 0.94832367}
   m_LocalPosition: {x: 0.5, y: 12.69, z: -16.106}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 56.151, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 37, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2583,7 +2583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 87541582}
-  offset: {x: 0, y: 17.5, z: -10.3}
+  offset: {x: 0, y: 14.57, z: -10.3}
 --- !u!1 &992566578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2618,7 +2618,7 @@ MonoBehaviour:
   mainCamera: {fileID: 963194227}
   uiController: {fileID: 1867517565}
   subCamera: {fileID: 1731430831}
-  maxLevel: 2
+  maxLevel: 3
   playerLevel: 0
 --- !u!4 &992566580
 Transform:
@@ -3381,6 +3381,7 @@ MonoBehaviour:
   brickBlockPrefab: {fileID: 1531101969777205, guid: 8aad5fca35890fd4389dabb982d52236, type: 3}
   player: {fileID: 87541581}
   countHolder: 1
+  brickHolderObjs: []
 --- !u!114 &1428545492
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,9 @@ public class BrickHolderController : MonoBehaviour
     [SerializeField]
     public int countHolder = 1;
 
+    [SerializeField]
+    private List<GameObject> brickHolderObjs = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,8 @@ public class BrickHolderController : MonoBehaviour
             Quaternion.identity
         );
 
+        brickHolderObjs.Add(brickPrefab);
+
         // brickPrefab.transform.position = Vector3.zero;
         brickPrefab.transform.SetParent(gameObject.transform);
         brickPrefab.transform.eulerAngles = new Vector3(-90f, 0, -180f);
@@ -46,6 +51,17 @@ public class BrickHolderController : MonoBehaviour
         );
 
         countHolder++;
+    }
+
+    public void RemoveBrickBlock()
+    {
+        if (countHolder - 2 < 0)
+        {
+            return;
+        }
+        Destroy(brickHolderObjs[countHolder - 2]);
+        countHolder--;
+        Debug.Log("Remove bric done " + countHolder);
     }
 
     public void ClearAllBrickBlock()

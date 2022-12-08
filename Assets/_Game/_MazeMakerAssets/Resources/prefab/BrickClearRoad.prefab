@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5820827052034383672}
   m_Layer: 0
   m_Name: di
-  m_TagString: Pllar_Clear_Brick
+  m_TagString: Remove Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 6154055669715976882}
   m_Layer: 5
   m_Name: BrickClearRoad
-  m_TagString: Untagged
+  m_TagString: Remove Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

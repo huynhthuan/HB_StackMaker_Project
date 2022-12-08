@@ -12,6 +12,6 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        transform.position = player.transform.position + offset;
+        transform.position = player.animator.transform.position + offset;
     }
 }
